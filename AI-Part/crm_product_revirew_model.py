@@ -1,5 +1,11 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from transformers import pipeline
 import re
+from Database.db_handler import insert_customer_data
+
 
 def clean_text(text):
     text = text.lower()
@@ -78,17 +84,6 @@ def classify_text(text, labels, threshold=0.4):
 hypothesis_template = "This customer feedback is about {}."
 
 
-sample_text = """I purchased the OmniStream 4K Pro hub last month hoping it would solve my connectivity problems, but it has been a nightmare of technical glitches from day one. 
-Initially, the installation process was smooth, but as soon as I tried to bridge it with my existing mesh network, the device started power cycling randomly. 
-I checked the event logs, and it keeps throwing a 'Error 505: Gateway Timeout' every time I attempt a firmware update. 
-I’ve tried resetting it to factory settings three times, changing the DNS configuration, and even swapping out the CAT6 cables, but the packet loss is still sitting at around 15% during peak hours. To make matters worse, the companion app crashes on Android 14 whenever I try to access the advanced settings to toggle the firewall. This isn't just a user error; there is clearly a bug in the latest patch that conflicts with legacy router protocols. I need a developer to look at my logs or I need a full refund because this hardware is currently serving as an expensive paperweight.
-"""
-
-label, confidence = classify_text(sample_text, list(COMPLAINT_LABEL_MAPPING.keys()))
-
-print("Predicted Label:", COMPLAINT_LABEL_MAPPING[label])
-print("Confidence Score:", confidence)
-
 
 
 #==================================================================================================================
@@ -102,6 +97,7 @@ classifier2 = pipeline("zero-shot-classification",
                       device=0)
 
 candidate_labels = ["Best", "Good", "Average", "Fair", "Bad"]
+dict1={"Best":5,"Good":4,"Average":3,"Fair":2,"Bad":1}
 
 def sentiment_analysis(text):
     text = clean_text(text)
@@ -116,6 +112,8 @@ def sentiment_analysis(text):
         return "Other / Uncertain", score
     
     return label, score
+
+#--------------------------------------------------------------------------------------------------------------
     
 # classifier2 = pipeline('sentiment-analysis', model='nlptown/bert-base-multilingual-uncased-sentiment')
 reviews = """I purchased the OmniStream 4K Pro hub last month hoping it would solve my connectivity problems, but it has been a nightmare of technical glitches from day one. 
@@ -124,7 +122,13 @@ I checked the event logs, and it keeps throwing a 'Error 505: Gateway Timeout' e
 I’ve tried resetting it to factory settings three times, changing the DNS configuration, and even swapping out the CAT6 cables, but the packet loss is still sitting at around 15% during peak hours. To make matters worse, the companion app crashes on Android 14 whenever I try to access the advanced settings to toggle the firewall. This isn't just a user error; there is clearly a bug in the latest patch that conflicts with legacy router protocols. I need a developer to look at my logs or I need a full refund because this hardware is currently serving as an expensive paperweight.
 """
 
-label, score = sentiment_analysis(reviews)
+sentiment, score = sentiment_analysis(reviews)
+label, confidence = classify_text(reviews, list(COMPLAINT_LABEL_MAPPING.keys()))
 
-print("Predicted Label:", label)
+print("Predicted Label:", COMPLAINT_LABEL_MAPPING[label])
+print("Confidence Score:", confidence)
+
+print("Predicted Label:", sentiment)
 print("Confidence Score:", score)
+
+insert_customer_data(reviews, COMPLAINT_LABEL_MAPPING[label], sentiment, dict1[sentiment], confidence)
