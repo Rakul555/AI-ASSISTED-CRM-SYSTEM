@@ -15,7 +15,7 @@ def clean_text(text):
     return text
 
 
-data = pd.read_csv('Dataset/data2.csv', header=0)
+data = pd.read_csv('Dataset/data3.csv', header=0)
 data['complaint_text'] = data['complaint_text'].apply(lambda x: clean_text(x))
 
 for i in range(len(data)):
