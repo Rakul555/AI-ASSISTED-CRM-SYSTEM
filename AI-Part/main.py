@@ -6,7 +6,6 @@ from RAG.retriever import fetch_category_insights, fetch_sample_complaints
 from RAG.context_builder import build_context
 from RAG.report_generator import generate_report
 
-# pseudo LLM object
 from llm_client import llm  
 
 def run_rag():
