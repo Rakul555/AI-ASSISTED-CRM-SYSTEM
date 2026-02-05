@@ -1,0 +1,200 @@
+.report-display {
+    margin-top: var(--spacing-lg);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.insights-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.insights-title {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-md);
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.insights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.insight-card {
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-normal);
+}
+
+.insight-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(67, 233, 123, 0.5);
+    box-shadow: 0 8px 24px rgba(67, 233, 123, 0.2);
+}
+
+.insight-card p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+.report-content {
+    padding: var(--spacing-xl);
+}
+
+.report-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.report-header h2 {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 2rem;
+    margin: 0;
+}
+
+.report-body {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Markdown Styling */
+.markdown-h1 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin: var(--spacing-xl) 0 var(--spacing-md);
+    font-weight: 800;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: var(--spacing-sm);
+}
+
+.markdown-h2 {
+    color: var(--text-primary);
+    font-size: 1.6rem;
+    margin: var(--spacing-lg) 0 var(--spacing-md);
+    font-weight: 700;
+    position: relative;
+    padding-left: var(--spacing-md);
+}
+
+.markdown-h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 24px;
+    background: var(--primary-color);
+    border-radius: 2px;
+}
+
+.markdown-h3 {
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    margin: var(--spacing-md) 0 var(--spacing-sm);
+    font-weight: 600;
+}
+
+.markdown-p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+    font-size: 1rem;
+}
+
+.markdown-ul,
+.markdown-ol {
+    color: var(--text-secondary);
+    margin: var(--spacing-md) 0;
+    padding-left: var(--spacing-xl);
+}
+
+.markdown-li {
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.7;
+}
+
+.markdown-strong {
+    color: var(--text-primary);
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.markdown-ul .markdown-li {
+    list-style-type: disc;
+}
+
+.markdown-ol .markdown-li {
+    list-style-type: decimal;
+}
+
+.report-section {
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.report-section:last-child {
+    border-bottom: none;
+}
+
+.section-heading {
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    margin-bottom: var(--spacing-sm);
+    font-weight: 700;
+    position: relative;
+    padding-left: var(--spacing-md);
+}
+
+.section-heading::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 20px;
+    background: var(--primary-gradient);
+    border-radius: 2px;
+}
+
+.section-text {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+    font-size: 1rem;
+}
+
+.section-text:last-child {
+    margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .report-content {
+        padding: var(--spacing-md);
+    }
+
+    .report-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .insights-grid {
+        grid-template-columns: 1fr;
+    }
+}

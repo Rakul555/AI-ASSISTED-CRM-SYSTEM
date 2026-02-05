@@ -4,7 +4,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from transformers import pipeline
 import re
-from Database.db_handler import insert_customer_data
+from db_handler import insert_customer_data
 
 
 def clean_text(text):
